@@ -1,0 +1,38 @@
+<form (ngSubmit)="submit()">
+    <div>
+        <label>
+            first name <span class='required'>*</span>:
+            <input id="firstname" name="firstname" [(ngModel)]='employee.firstname' required #firstname="ngModel" />
+            <span *ngIf="firstname.errors && (firstname.dirty || firstname.touched)" class="error-msg">
+            <span [hidden]="!firstname.errors.required">Firstname is required</span>
+            </span>
+        </label>
+    </div>
+    <div>
+        <label>last name <span class='required'>*</span>:
+            <input id="lastname" name="lastname" [(ngModel)]='employee.lastname' required #lastname="ngModel" />
+            <span *ngIf="lastname.errors && (lastname.dirty || lastname.touched)" class="error-msg">
+            <span [hidden]="!lastname.errors.required">Lastname is required</span>
+            </span>
+        </label>
+    </div>
+    <div>
+        <label>phone number:
+            <input id="phonenumber" name="phonenumber" [(ngModel)]='employee.phonenumber' type='tel' #phonenumber="ngModel" />
+        </label>
+    </div>
+    <div>
+        <label>department <span class='required'>*</span>:
+            <select id="department" name="department" [(ngModel)]="employee.department" required #department="ngModel">
+                <option *ngFor="let depart of this.employeeService.getState().departments" [ngValue]="depart">{{depart.name}}</option>
+            </select>
+            <span *ngIf="department.errors && (department.dirty || department.touched)" class="error-msg">
+            <span [hidden]="!department.errors.required">Department is required</span>
+            </span>
+        </label>
+    </div>
+    <div>
+        <button type='submit'>create</button>
+        <button (click)="cancel()">cancel</button>
+    </div>
+</form>

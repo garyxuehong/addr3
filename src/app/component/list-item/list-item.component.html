@@ -1,0 +1,8 @@
+<div>
+    <div>firstname: {{employee.firstname}}</div>
+    <div>lastname: {{employee.lastname}}</div>
+    <div>department: {{employee.department?employee.department.name:''}}</div>
+    <div>
+        <button (click)='onItemClicked()'>detail</button>
+    </div>
+</div>

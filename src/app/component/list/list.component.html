@@ -1,0 +1,23 @@
+<div class='list'>
+    <div class='list__action-bar'>
+        <button class='action-bar__item' (click)="onCreateNew()">new</button>
+        <div class='action-bar__item'>
+            search employees by name:
+            <input (input)='onNameSearchChanged($event)' />
+        </div>
+        <div class='action-bar__item'>
+            filter employees by depart:
+            <input (input)='onDepartmentSearchChanged($event)' />
+        </div>
+    </div>
+    <div class='list__action-bar'>
+        <div class='action-bar__item'>
+            sort by lastname:
+            <a href='javascript:void(0)' (click)='this.sortByLastname(true)'>asc ↑↑↑</a>
+            <a href='javascript:void(0)' (click)='sortByLastname(false)'>desc ↓↓↓</a>
+            <a href='javascript:void(0)' (click)='unsort(false)'>reset</a>
+        </div>
+    </div>
+    <app-list-item *ngFor="let employee of getState().viewEmployees" [employee]="employee" (onEmployeeClicked)="onItemClicked(employee)">
+    </app-list-item>
+</div>
