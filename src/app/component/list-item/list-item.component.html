@@ -1,8 +1,8 @@
-<div>
-    <div>firstname: {{employee.firstname}}</div>
-    <div>lastname: {{employee.lastname}}</div>
-    <div>department: {{employee.department?employee.department.name:''}}</div>
-    <div>
+<div class="list-item-detail">
+    <div class="firstname">firstname: {{employee.firstname}}</div>
+    <div class="lastname">lastname: {{employee.lastname}}</div>
+    <div class="department">department: {{employee.department?employee.department.name:''}}</div>
+    <div class="action">
         <button (click)='onItemClicked()'>detail</button>
     </div>
 </div>
