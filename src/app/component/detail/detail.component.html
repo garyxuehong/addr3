@@ -2,11 +2,11 @@
     <div>
         <button (click)='back()'>back</button>
     </div>
-    <div>id: {{employee?employee.id:''}}</div>
-    <div>first name: {{employee?employee.firstname:''}}</div>
-    <div>last name: {{employee?employee.lastname:''}}</div>
-    <div>phone number: {{employee?employee.phonenumber:''}}</div>
-    <div>department: {{employee && employee.department ? employee.department.name :''}}</div>
+    <div class="id">id: {{employee?employee.id:''}}</div>
+    <div class="firstname">first name: {{employee?employee.firstname:''}}</div>
+    <div class="lastname">last name: {{employee?employee.lastname:''}}</div>
+    <div class="phonenumber">phone number: {{employee?employee.phonenumber:''}}</div>
+    <div class="department">department: {{employee && employee.department ? employee.department.name :''}}</div>
     <div>
         <button (click)="delete()">Delete</button>
     </div>

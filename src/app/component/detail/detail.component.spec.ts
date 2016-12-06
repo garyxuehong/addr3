@@ -3,24 +3,42 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { DebugElement } from '@angular/core';
 
-import { ListItemComponent } from './list-item.component';
+import { DetailComponent } from './detail.component';
 
 import { Employee, Department } from '../../data';
 
-describe('ListItemComponent', () => {
+import {EmployeeService} from '../../service';
 
-  let component: ListItemComponent;
-  let fixture: ComponentFixture<ListItemComponent>;
+import { Router, ActivatedRoute, Params } from '@angular/router';
+import { Location } from '@angular/common';
+
+describe('DetailComponent', () => {
+  let component: DetailComponent;
+  let fixture: ComponentFixture<DetailComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ListItemComponent ]
+      declarations: [ DetailComponent ],
+      providers: [
+        {provide: EmployeeService, useValue: getEmpty()},
+        {provide: ActivatedRoute, useValue: {
+          params: {
+            switchMap: ()=>({
+              subscribe: () => {}
+            })
+          }
+        }},
+        {provide: Router, useValue: {
+          navigate: ()=>{}
+        }},
+        {provide: Location, useValue: getEmpty()}
+      ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(ListItemComponent);
+    fixture = TestBed.createComponent(DetailComponent);
     component = fixture.componentInstance;
     component.employee = getFakeEmployee();
     fixture.detectChanges();
@@ -33,12 +51,20 @@ describe('ListItemComponent', () => {
   it('should render supplly employee detail', ()=>{
     let compiled = fixture.debugElement.nativeElement;
     const fake = getFakeEmployee();
+    expect(compiled.querySelector('.id').textContent).toContain(fake.id);
     expect(compiled.querySelector('.firstname').textContent).toContain(fake.firstname);
     expect(compiled.querySelector('.lastname').textContent).toContain(fake.lastname);
+    expect(compiled.querySelector('.phonenumber').textContent).toContain(fake.phonenumber);
     expect(compiled.querySelector('.department').textContent).toContain(fake.department.name);
   })
 
 });
+
+function getEmpty() {
+  return {
+
+  }
+}
 
 function getFakeEmployee() {
   return new Employee({
