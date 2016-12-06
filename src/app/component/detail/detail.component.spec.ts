@@ -7,7 +7,7 @@ import { DetailComponent } from './detail.component';
 
 import { Employee, Department } from '../../data';
 
-import {EmployeeService} from '../../service';
+import { EmployeeService } from '../../service';
 
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { Location } from '@angular/common';
@@ -18,23 +18,27 @@ describe('DetailComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ DetailComponent ],
+      declarations: [DetailComponent],
       providers: [
-        {provide: EmployeeService, useValue: getEmpty()},
-        {provide: ActivatedRoute, useValue: {
-          params: {
-            switchMap: ()=>({
-              subscribe: () => {}
-            })
+        { provide: EmployeeService, useValue: getEmpty() },
+        {
+          provide: ActivatedRoute, useValue: {
+            params: {
+              switchMap: () => ({
+                subscribe: () => { }
+              })
+            }
           }
-        }},
-        {provide: Router, useValue: {
-          navigate: ()=>{}
-        }},
-        {provide: Location, useValue: getEmpty()}
+        },
+        {
+          provide: Router, useValue: {
+            navigate: () => { }
+          }
+        },
+        { provide: Location, useValue: getEmpty() }
       ]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {
@@ -48,7 +52,7 @@ describe('DetailComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should render supplly employee detail', ()=>{
+  it('should render supplly employee detail', () => {
     let compiled = fixture.debugElement.nativeElement;
     const fake = getFakeEmployee();
     expect(compiled.querySelector('.id').textContent).toContain(fake.id);
@@ -68,16 +72,13 @@ function getEmpty() {
 
 function getFakeEmployee() {
   return new Employee({
-      id: 'new-id',
-      firstname: 'fn',
-      lastname: 'ln',
-      department: new Department({
-        id: 'new-depart',
-        name: 'dname'
-      }),
-      phonenumber: '0404 000 000'
-    });
-    fixture.employee = employee;
-    fixture.detectChanges();
+    id: 'new-id',
+    firstname: 'fn',
+    lastname: 'ln',
+    department: new Department({
+      id: 'new-depart',
+      name: 'dname'
+    }),
+    phonenumber: '0404 000 000'
   });
 }
